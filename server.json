@@ -6,10 +6,9 @@
     "members": "Diego Fernandes, Dani leão, Laura Beatris e Rafael Camarda",
     "published_at": "2021-01-15 13:00:00",
     "thumbnail": "http://storage.googleapis.com/golden-wind/nextlevelweek/05-podcastr/funcional.jpg",
-
+    "description": "<p> Nesse episódio do fala dev, diego fernandes se reunue com joão",
     "file": {
         "url": "http://storage.googleapis.com/golden-wind/nextlevelweek/05-podcastr/audios/funcional.m4a",
-
         "type": "audio/x-m4a",
         "duration": 4237 
     }
