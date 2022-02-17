@@ -80,10 +80,12 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         <table cellSpacing={0}>
 
           <thead>
+            <tr>
             <th>Podcast</th>
             <th>Integrantes</th>
             <th>Data</th>
             <th>Duração</th>
+            </tr>
           </thead>
           <tbody>
             {allEpisodes.map(episode => { // map precisa de uma key
@@ -100,7 +102,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   </td>
 
                   <td>
-                    <a href="">{episode.title}</a>
+                    <Link href={`/episodes/${episode.id}`}>
+                    <a>{episode.title}</a>
+                    </Link>
                   </td>
                   <td>{episode.members}</td>
                   <td style={{ width:100 }}>{episode.publishedAt}</td>
