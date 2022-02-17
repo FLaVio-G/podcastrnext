@@ -80,10 +80,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             <th>Integrantes</th>
             <th>Data</th>
             <th>Duração</th>
-            <th></th>
           </thead>
           <tbody>
-            {latestEpisodes.map(episode => { // map precisa de uma key
+            {allEpisodes.map(episode => { // map precisa de uma key
               return (
                 <tr key={episode.id}>
                   <td>
