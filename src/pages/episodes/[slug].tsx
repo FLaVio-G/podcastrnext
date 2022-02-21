@@ -2,6 +2,7 @@ import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR'
 import Image from 'next/image'
 import { GetStaticProps, GetStaticPaths } from 'next';
+import  Link from 'next/link';
 
 
 import { useRouter } from 'next/router'
@@ -33,9 +34,11 @@ export default function ({ episode }: EpisodeProps) {
     return (
         <div className={styles.episode}>
             <div className={styles.thumbnailContainer}>
+                <Link href="/">
                 <button type="button">
                     <img src="" alt="Voltar" />
                 </button>
+                </Link>
                 <Image
                     width={700}
                     height={160}
@@ -62,7 +65,9 @@ export default function ({ episode }: EpisodeProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
-        paths: [],
+        paths: [
+            {params: {slug: 'Uma-conversa-sobre-programação-funcional-e-orientação-a-objetos'}}
+        ],
         fallback: 'blocking'
     }
 }

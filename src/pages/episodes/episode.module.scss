@@ -42,4 +42,38 @@
 
         }
     }
+    header {
+        padding-bottom: 1rem;
+        border-bottom: 1rem solid(--gray-100);
+  
+
+    h1 {
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+        span {
+            display: inline-block;
+            font-size: 0.875rem;
+      
+        & + span{
+        display: inline-block;
+        font-size: 0.875rem;
+        position: relative;
+             
+            &::before{
+                content: "";
+                        width: 4px;
+                        height: 4px;
+                        border-radius: 2px;
+                        background: #DDD;
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        transform: translate(-50%, -50%)
+            }
+
+        }
+    }
+}
 }
