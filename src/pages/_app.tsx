@@ -1,26 +1,33 @@
 import '../styles/global.scss';
 
 import { Header } from '../components/Header';
-import { Player } from '../components/Player';
 
+import { Player } from '../components/Player';
+import { PlayerContext } from '../contexts/PlayerContext'
 
 
 import styles from '../styles/app.module.scss';
 
-import { PlayerContext } from '../contexts/playerContext';
+
+
 
 
 function MyApp({ Component, pageProps }) {
   return (
-    <PlayerContext.Provider value={'Diego'}>
+
+
+    <PlayerContext.Provider value ={'Diego'}>
     <div className={styles.wrapper}>
       <main>
         <Header />
         <Component {...pageProps} />
       </main>
-      <Player />
+      <Player/>
     </div>
-      </PlayerContext.Provider>
+    </PlayerContext.Provider>
+    
+
+   
     
   )
 }
