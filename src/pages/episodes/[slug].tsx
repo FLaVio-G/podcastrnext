@@ -2,11 +2,11 @@
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR'
 import Image from 'next/image'
+import { useRouter } from 'next/router';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
 
 
-import { useRouter } from 'next/router'
 import { api } from '../../services/api';
 import { convertDurationToTime } from '../../utills/convertDurationToTimeString';
 
@@ -31,7 +31,8 @@ type EpisodeProps = {
 }
 
 export default function ({ episode }: EpisodeProps) {
-    const router = useRouter();
+
+
     return (
         <div className={styles.episode}>
             <div className={styles.thumbnailContainer}>
@@ -64,20 +65,37 @@ export default function ({ episode }: EpisodeProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    const { data } = await api.get('episodes', {
+        params: {
+            _limit: 2,
+            _sort: 'publishedAt',
+            _order: 'desc'
+        }
+    })
 
-    return {
-        paths: [
-            {
-                params: {
-                    slug: 'Uma-conversa-sobre-programação-funcional-e-orientação-a-objetos'
-                }
+    const paths = data.map(episode => {
+        return {
+            params: {
+                slug: episode.id
             }
-        ],
+        }
+    })
+    return {
+        paths,
         fallback: 'blocking'
     }
 }
+
+
+//15 mil produtos cadastrados ?
+//no caso podemos pegar apenas os 50 produtos mais vendidos
+//e o restante dos produtos deixa no modo incremental(incremental static generation)
+
+//aqui vc pode pegar os episodios mais acessados, para evitar quantidade de acessos no banco  de dados 
+
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const { slug } = ctx.params;
+
 
     const { data } = await api.get(`/episodes/${slug}`)
 
