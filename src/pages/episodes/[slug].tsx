@@ -1,8 +1,9 @@
+/* eslint-disable */
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR'
 import Image from 'next/image'
 import { GetStaticProps, GetStaticPaths } from 'next';
-import  Link from 'next/link';
+import Link from 'next/link';
 
 
 import { useRouter } from 'next/router'
@@ -35,9 +36,9 @@ export default function ({ episode }: EpisodeProps) {
         <div className={styles.episode}>
             <div className={styles.thumbnailContainer}>
                 <Link href="/">
-                <button type="button">
-                    <img src="" alt="Voltar" />
-                </button>
+                    <button type="button">
+                        <img src="" alt="Voltar" />
+                    </button>
                 </Link>
                 <Image
                     width={700}
@@ -66,7 +67,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths: [
-            {params: {slug: 'Uma-conversa-sobre-programação-funcional-e-orientação-a-objetos'}}
+            {
+                params: {
+                    slug: 'Uma-conversa-sobre-programação-funcional-e-orientação-a-objetos'
+                }
+            }
         ],
         fallback: 'blocking'
     }
