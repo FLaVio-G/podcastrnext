@@ -10,13 +10,16 @@ import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { api } from '../services/api';
 import { convertDurationToTime } from '../utills/convertDurationToTimeString';
+import { useContext } from 'react';
+import { PlayerContext } from '../contexts/PlayerContext';
 
 import styles from './home.module.scss';
+
 
 type Episode = {
   id: string;
   title: string;
-  members: String;
+  members: string;
   published_at: string;
   durationAsString: number;
   duration: number;
@@ -36,11 +39,13 @@ type HomeProps = {
 
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+  
+  const {play} = useContext(PlayerContext)
 
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
-        <h2>Últimos lançamentos</h2>
+        <h2>Últimos lançamentos </h2>
 
         <ul>
           {latestEpisodes.map(episode => { // map precisa de uma key
@@ -65,8 +70,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
                 </div>
 
-                <button type="button"></button>
+                <button type="button" onClick={() => play(episode)}>
                 <img src="" alt="Tocar episódio" />
+                </button>
               </li>
             )
           })}
