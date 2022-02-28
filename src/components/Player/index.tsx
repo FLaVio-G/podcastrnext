@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useContext } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import Slider from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
@@ -8,7 +8,27 @@ import { PlayerContext } from '../../contexts/PlayerContext';
 import styles from './styles.module.scss';
 
 export function Player() {
-    const { episodeList, currentEpisodeIndex } = useContext(PlayerContext)
+    const audioRef = useRef<HTMLAudioElement>(null);
+
+    const { episodeList,
+        currentEpisodeIndex,
+        isPlaying,
+        togglePlay,
+        setIsPlayingState
+    } = useContext(PlayerContext)
+
+    useEffect(() => {
+        if (!audioRef.current) {
+            return;
+        } 
+        if(isPlaying) {
+            audioRef.current.play();
+        } else {
+            audioRef.current.pause();
+        }
+    }, [isPlaying])
+
+
 
     const episode = episodeList[currentEpisodeIndex]
 
@@ -45,7 +65,7 @@ export function Player() {
                             <Slider
                                 trackStyle={{ backgroundColor: '#04d361' }}
                                 railStyle={{ backgroundColor: '#9f75ff' }}
-                                handleStyle={{ borderColor: '#04d361', borderWidth: 4}}
+                                handleStyle={{ borderColor: '#04d361', borderWidth: 4 }}
                             />
                         ) : (
                             <div className={styles.emptySlider} />
@@ -55,14 +75,17 @@ export function Player() {
                     <span>00:00</span>
                 </div>
 
-                { episode && ( // usando somente IF
-                <audio
-                src={episode.url}
-                autoPlay
-                
-                />
+                {episode && ( // usando somente IF
+                    <audio
+                        src={episode.url}
+                        ref={ audioRef }
+                        autoPlay
+                        onPlay={() => setIsPlayingState(true)}
+                        onPause={() => setIsPlayingState(false)}
 
-                
+                    />
+
+
                 )}
 
                 <div className={styles.buttons} >
@@ -74,8 +97,15 @@ export function Player() {
                         <img src="" alt="Tocar anterior" />
                     </button>
 
-                    <button type="button" className={styles.playButton} disabled={!episode}>
-                        <img src="" alt="tocar" />
+                    <button
+                        type="button"
+                        className={styles.playButton}
+                        disabled={!episode}
+                        onClick={togglePlay}
+                    >
+                        {isPlaying
+                            ? <img src="" alt="pause" />
+                            : <img src="" alt="tocar" />}
                     </button>
 
                     <button type="button" disabled={!episode}>
