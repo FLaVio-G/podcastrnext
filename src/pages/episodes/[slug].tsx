@@ -12,10 +12,12 @@ import { convertDurationToTime } from '../../utills/convertDurationToTimeString'
 
 import styles from './episode.module.scss'
 
+import { usePlayer } from '../../contexts/PlayerContext';
+
 type Episode = {
     id: string;
     title: string;
-    members: String;
+    members: string;
     published_at: string;
     durationAsString: number;
     duration: number;
@@ -32,6 +34,8 @@ type EpisodeProps = {
 
 export default function ({ episode }: EpisodeProps) {
 
+    const {play} = usePlayer()
+
 
     return (
         <div className={styles.episode}>
@@ -47,7 +51,7 @@ export default function ({ episode }: EpisodeProps) {
                     src={episode.thumbnail}
                     objectFit="cover"
                 />
-                <button type="button">
+                <button type="button" onClick={() => play(episode)}>
                     <img src="" alt="Tocar episódio" />
                 </button>
             </div>
@@ -120,4 +124,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         revalidate: 60 * 60 * 24, //24 hrs
 
     }
+}
+
+function playerContext(playerContext: any): {} {
+    throw new Error('Function not implemented.');
 }

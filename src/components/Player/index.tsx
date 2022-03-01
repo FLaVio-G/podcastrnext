@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { useContext, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Slider from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
 
-import { PlayerContext } from '../../contexts/PlayerContext';
+import { usePlayer } from '../../contexts/PlayerContext';
 import styles from './styles.module.scss';
 
 export function Player() {
@@ -20,7 +20,7 @@ export function Player() {
         playPrevious,
         hasNext,
         hasPrevious,
-    } = useContext(PlayerContext)
+    } = usePlayer()
 
     useEffect(() => {
         if (!audioRef.current) {
