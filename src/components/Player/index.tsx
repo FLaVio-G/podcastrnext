@@ -1,14 +1,17 @@
 import Image from 'next/image';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
 
 import { usePlayer } from '../../contexts/PlayerContext';
 import styles from './styles.module.scss';
+import { convertDurationToTime } from '../../utills/convertDurationToTimeString';
 
 export function Player() {
     const audioRef = useRef<HTMLAudioElement>(null);
+
+    const  [progress, setProgress] = useState(0)
 
     const { 
         episodeList,
@@ -68,7 +71,9 @@ export function Player() {
 
             <footer className={!episode ? styles.empty : ''}>
                 <div className={styles.progress}>
-                    <span>00:00</span>
+
+                <span>{convertDurationToTime(progress)}</span>
+
                     <div className={styles.slider}>
                         {episode ? (
                             <Slider
@@ -81,7 +86,8 @@ export function Player() {
                         )}
                     </div>
 
-                    <span>00:00</span>
+                    <span>{convertDurationToTime(episode ?.duration ?? 0)}</span>
+
                 </div>
 
                 {episode && ( // usando somente IF
@@ -92,6 +98,7 @@ export function Player() {
                         loop={isLooping}
                         onPlay={() => setIsPlayingState(true)}
                         onPause={() => setIsPlayingState(false)}
+                      
 
                     />
 
