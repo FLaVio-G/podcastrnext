@@ -40,6 +40,14 @@ export function Player() {
         }
     }, [isPlaying])
 
+    function setupProgressListener() {
+
+        audioRef.current.currentTime = 0;
+
+        audioRef.current.addEventListener('timeupdate', () => {
+            setProgress(Math.floor(audioRef.current.currentTime));
+        });
+    }
 
 
     const episode = episodeList[currentEpisodeIndex]
@@ -77,6 +85,8 @@ export function Player() {
                     <div className={styles.slider}>
                         {episode ? (
                             <Slider
+                                max={episode.duration}
+                                value={progress}
                                 trackStyle={{ backgroundColor: '#04d361' }}
                                 railStyle={{ backgroundColor: '#9f75ff' }}
                                 handleStyle={{ borderColor: '#04d361', borderWidth: 4 }}
@@ -98,7 +108,7 @@ export function Player() {
                         loop={isLooping}
                         onPlay={() => setIsPlayingState(true)}
                         onPause={() => setIsPlayingState(false)}
-                      
+                        onLoadedMetadata= {setupProgressListener}
 
                     />
 
