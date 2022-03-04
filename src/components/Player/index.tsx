@@ -1,4 +1,7 @@
 import Image from 'next/image';
+import {FaPlay} from 'react-icons/fa'
+
+
 import { useRef, useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 
@@ -155,9 +158,11 @@ export function Player() {
                         disabled={!episode}
                         onClick={togglePlay}
                     >
+                        
                         {isPlaying
                             ? <img src="" alt="pause" />
                             : <img src="" alt="tocar" />}
+                            
                     </button>
 
                     <button type="button" onClick={playNext} disabled={!episode || !hasNext}>
