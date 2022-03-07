@@ -10,7 +10,7 @@ export function Header() {
     });
     return (
         <header className={styles.headerContainer}>
-        <img src="" alt="Podcastr" />
+        <img src='/podcastr-logo.svg' alt="Podcastr" />
 
 
         <p>O melhor Podcastr</p>

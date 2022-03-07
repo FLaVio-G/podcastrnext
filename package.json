@@ -1,5 +1,6 @@
 {
   "name": "podcastrnext",
+  "homepage": "https://KaTSu113.github.io/podcastnext",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,9 +9,9 @@
     "lint": "next lint",
     "server": "json-server server.json -w -d 750 -p 3333",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://KaTSu113.github.io/podcastnext",
+
   "dependencies": {
     "axios": "^0.25.0",
     "date-fns": "^2.28.0",
