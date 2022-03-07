@@ -9,7 +9,7 @@
     "lint": "next lint",
     "server": "json-server server.json -w -d 750 -p 3333",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "axios": "^0.25.0",
